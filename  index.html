@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bianca Posterli — Brand & Social Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Suisse+Intl:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0a09;
+    --bg2: #111009;
+    --surface: #161410;
+    --border: #2a2620;
+    --text: #e8e0d0;
+    --text-dim: #7a7060;
+    --text-muted: #3d3830;
+    --accent: #c8a96e;
+    --accent-dim: #7a6540;
+    --red: #a03030;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.18s ease;
+    opacity: 0.5;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9997;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 48px;
+    mix-blend-mode: normal;
+  }
+  nav::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 75% 40%, #1a1208 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, #0f0d06 0%, transparent 50%),
+      var(--bg);
+  }
+
+  .hero-line-deco {
+    position: absolute;
+    top: 0; right: 120px;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, var(--border) 30%, var(--border) 70%, transparent 100%);
+    opacity: 0.6;
+  }
+  .hero-line-deco2 {
+    position: absolute;
+    top: 0; right: 360px;
+    width: 1px;
+    height: 60%;
+    background: linear-gradient(to bottom, transparent 0%, var(--text-muted) 50%, transparent 100%);
+    opacity: 0.3;
+  }
+
+  .hero-tag {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-name {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: clamp(64px, 10vw, 140px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  .hero-descriptor {
+    position: relative;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+  .hero-descriptor span {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+  .hero-descriptor .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--accent-dim);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 48px; right: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.4s forwards;
+  }
+  .hero-scroll span {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--accent-dim), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ABOUT */
+  .about {
+    padding: 140px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+  }
+  .about::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .about-left {
+    position: sticky;
+    top: 120px;
+  }
+  .about-num {
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1;
+    margin-bottom: 0;
+    user-select: none;
+  }
+
+  .about-right h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+  .about-right h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .about-right p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    max-width: 560px;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 40px;
+  }
+  .about-tag {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: all 0.3s ease;
+  }
+  .about-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* WORK */
+  .work {
+    padding: 140px 48px;
+    position: relative;
+  }
+  .work::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  }
+
+  .work-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 80px;
+  }
+  .work-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .work-header h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .project-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: start;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    transition: all 0.4s ease;
+    cursor: none;
+    overflow: hidden;
+  }
+  .project-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--surface);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .project-item:hover::before { transform: scaleX(1); }
+  .project-item > * { position: relative; z-index: 1; }
+
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-muted);
+    padding-top: 6px;
+    transition: color 0.3s ease;
+  }
+  .project-item:hover .project-num { color: var(--accent); }
+
+  .project-info h3 {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+  }
+  .project-item:hover .project-info h3 { color: var(--accent); }
+
+  .project-info p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-dim);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    padding-top: 6px;
+  }
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border: 1px solid var(--text-muted);
+    transition: all 0.3s ease;
+  }
+  .project-item:hover .project-tag {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  /* CONTACT */
+  .contact {
+    padding: 140px 48px 100px;
+    position: relative;
+    text-align: center;
+  }
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  }
+
+  .contact-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+  }
+
+  .contact h2 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 110px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 48px;
+  }
+  .contact h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .contact-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  .contact-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+  }
+  .contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link:hover::after { width: 100%; }
+
+  .contact-email-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    border: 1px solid var(--accent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+  }
+  .contact-email-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .contact-email-btn:hover { color: var(--bg); }
+  .contact-email-btn:hover::before { transform: scaleX(1); }
+  .contact-email-btn span { position: relative; z-index: 1; }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+  footer .footer-right {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* Reveal on scroll */
+  .js-loaded .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .js-loaded .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .js-loaded .reveal-delay-1 { transition-delay: 0.1s; }
+  .js-loaded .reveal-delay-2 { transition-delay: 0.2s; }
+  .js-loaded .reveal-delay-3 { transition-delay: 0.3s; }
+  .js-loaded .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 24px; }
+    .nav-links { display: none; }
+    .hero, .about, .work, .contact { padding-left: 24px; padding-right: 24px; }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .about-left { position: relative; top: auto; }
+    .about-num { font-size: 80px; }
+    .project-item { grid-template-columns: 50px 1fr; }
+    .project-tags { display: none; }
+    footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-logo">BP</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line-deco"></div>
+  <div class="hero-line-deco2"></div>
+
+  <p class="hero-tag">Brand & Marketing Leader — 18+ Years</p>
+  <h1 class="hero-name">Bianca<br><em>Posterli</em></h1>
+  <div class="hero-descriptor">
+    <div class="divider"></div>
+    <span>Apple · Twitter · Doodles — where media, technology & culture collide</span>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-left">
+    <div class="reveal">
+      <p class="section-label">01 — About</p>
+      <div class="about-num">01</div>
+    </div>
+  </div>
+  <div class="about-right">
+    <h2 class="reveal">Where media,<br>technology &<br><em>culture</em> meet.</h2>
+    <p class="reveal reveal-delay-1">I'm an award-winning brand and marketing leader with 18+ years of experience shaping culturally resonant campaigns, building internet-native brands, and guiding executive narratives at some of the world's most influential companies — including Twitter and Apple.</p>
+    <p class="reveal reveal-delay-2">I'm passionate about brand storytelling and delivering joy to consumers in unexpected ways. My expertise spans brand strategy, integrated marketing, creative direction, and executive communications — helping companies build cultural relevance and brand love at scale.</p>
+    <p class="reveal reveal-delay-2">At Twitter, I led award-winning campaigns that defined the brand's voice, including the <em style="font-style:italic; color: var(--accent)">140 Collection</em>, <em style="font-style:italic; color: var(--accent)">Tweet it Into Existence</em>, and multiple global activations. At Doodles, I built the company's first brand strategy to bring Web3 into the consumer space. Currently at Apple, I lead executive social strategy — shaping how leadership shows up during launches, crises, and milestone moments.</p>
+    <div class="about-tags reveal reveal-delay-3">
+      <span class="about-tag">Brand Strategy</span>
+      <span class="about-tag">Integrated Marketing</span>
+      <span class="about-tag">Executive Communications</span>
+      <span class="about-tag">Creative Direction</span>
+      <span class="about-tag">Social Strategy</span>
+      <span class="about-tag">Cultural Insight</span>
+      <span class="about-tag">Global Campaigns</span>
+      <span class="about-tag">Web3 & Emerging Tech</span>
+    </div>
+  </div>
+</section>
+
+<!-- Work -->
+<section class="work" id="work">
+  <div class="work-header">
+    <div>
+      <p class="section-label reveal">02 — Selected Work</p>
+      <h2 class="reveal reveal-delay-1">The <em>Work</em></h2>
+    </div>
+  </div>
+
+  <div class="project-list">
+
+    <div class="project-item reveal">
+      <span class="project-num">01</span>
+      <div class="project-info">
+        <h3>Tweet it Into Existence — Twitter</h3>
+        <p>Led the award-winning campaign that turned Twitter's platform power into a cultural mantra — inspiring creators, founders, and dreamers to use the platform as a launching pad for what they wanted to bring into the world.</p>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag">Brand Campaign</span>
+        <span class="project-tag">Award-Winning</span>
+      </div>
+    </div>
+
+    <div class="project-item reveal reveal-delay-1">
+      <span class="project-num">02</span>
+      <div class="project-info">
+        <h3>The 140 Collection — Twitter</h3>
+        <p>Defined the brand's voice and cultural impact through one of Twitter's most celebrated campaign activations — a project that became emblematic of how the platform shapes public conversation.</p>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag">Brand Strategy</span>
+        <span class="project-tag">Cultural Marketing</span>
+      </div>
+    </div>
+
+    <div class="project-item reveal reveal-delay-2">
+      <span class="project-num">03</span>
+      <div class="project-info">
+        <h3>Brand Strategy — Doodles</h3>
+        <p>Built the company's first-ever brand strategy from the ground up, charting a path to bring Web3 culture into the mainstream consumer space — making NFTs and digital ownership feel human, joyful, and accessible.</p>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag">Brand Strategy</span>
+        <span class="project-tag">Web3</span>
+      </div>
+    </div>
+
+    <div class="project-item reveal reveal-delay-3">
+      <span class="project-num">04</span>
+      <div class="project-info">
+        <h3>Executive Social Strategy — Apple</h3>
+        <p>Lead executive social strategy at Apple, shaping how leadership communicates during product launches, pivotal moments, and crisis — crafting the narratives that define how the world's most valuable brand speaks at the highest level.</p>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag">Exec Comms</span>
+        <span class="project-tag">Social Strategy</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <p class="contact-eyebrow reveal">03 — Contact</p>
+  <h2 class="reveal reveal-delay-1">Let's make<br>something <em>real.</em></h2>
+  <div class="contact-links reveal reveal-delay-2">
+    <a href="#" class="contact-link">LinkedIn</a>
+    <a href="#" class="contact-link">Instagram</a>
+    <a href="#" class="contact-link">Twitter / X</a>
+  </div>
+  <div class="reveal reveal-delay-3">
+    <a href="/cdn-cgi/l/email-protection#b2d0dbd3dcd1d3f2d0dbd3dcd1d3c2ddc1c6d7c0dedb9cd1dddf" class="contact-email-btn"><span><span class="__cf_email__" data-cfemail="402229212e2321002229212e2321302f333425322c296e232f2d">[email&#160;protected]</span></span></a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Bianca Posterli</p>
+  <p class="footer-right">Award-Winning Brand & Marketing Leader</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX - 4 + 'px';
+    cursor.style.top = mouseY - 4 + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX - 18) * 0.12;
+    ringY += (mouseY - ringY - 18) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.transform = 'scale(1.5)';
+      ring.style.opacity = '0.2';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  // Add js-loaded so reveal CSS kicks in
+  document.body.classList.add('js-loaded');
+
+  // Scroll reveal — mark everything visible immediately as fallback, then use observer
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(el => el.classList.add('visible'));
+
+  if ('IntersectionObserver' in window) {
+    reveals.forEach(el => el.classList.remove('visible'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -10px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  }
+</script>
+</body>
+</html>
